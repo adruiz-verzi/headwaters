@@ -69,6 +69,34 @@ except FileNotFoundError:
             "distinct_universities": 0, "distinct_states": 0}
 PATENTS_JSON = json.dumps(pats, separators=(",", ":"))
 
+# Combined "Deals like theirs": one university-software-IP view. Each row is tagged
+# by how we found it, a tech-transfer "licensable now" listing (U of Utah today) or
+# a granted patent (all US universities). Same concept, one table, filterable by type.
+deals = []
+for r in tto["records"]:
+    deals.append({
+        "dtype": "license", "university": "University of Utah", "state": "UT",
+        "title": r["title"], "category": r.get("category", ""),
+        "inventors": r.get("inventors", "") or r.get("lead_inventor", ""),
+        "id": r["id"], "ref": r["id"],
+        "url": "https://technologylicensing.utah.edu/available-technologies/" + r["id"],
+    })
+for r in pats["records"]:
+    deals.append({
+        "dtype": "patent", "university": r["university"], "state": r.get("state", ""),
+        "title": r["title"], "category": r.get("category", ""),
+        "inventors": r.get("inventors", ""), "id": r["id"], "ref": "US" + r["id"],
+        "url": r.get("url", ""), "date": r.get("date", ""),
+    })
+DEALS = {
+    "records": deals,
+    "license_count": sum(1 for d in deals if d["dtype"] == "license"),
+    "patent_count": sum(1 for d in deals if d["dtype"] == "patent"),
+    "universities": len(set(d["university"] for d in deals)),
+    "states": len(set(d["state"] for d in deals if d["state"])),
+}
+DEALS_JSON = json.dumps(DEALS, separators=(",", ":"))
+
 SCANNED = datetime.date(2026, 9, 22).strftime("%B %-d, %Y")
 
 PAGE = r"""<title>Headwaters . Spinout Intelligence for Summit Venture Studio</title>
@@ -179,6 +207,27 @@ a.tinv:hover{color:var(--water)}
   .prow .puni{white-space:normal;color:var(--water)}
   .prow .pnum{text-align:left}
 }
+.thead-deal,.drow{display:grid;grid-template-columns:88px minmax(0,190px) minmax(0,2fr) minmax(0,170px) 112px;gap:16px;align-items:center}
+.drow{padding:14px 22px;border-bottom:1px solid var(--line);cursor:pointer;transition:background .12s}
+.drow:last-child{border-bottom:0}
+.drow:hover{background:var(--surface-2)}
+.drow>div{min-width:0}
+.dtag{font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;padding:3px 8px;border-radius:6px;white-space:nowrap}
+.dtag.lic{color:var(--accent);background:var(--accent-soft);border:1px solid color-mix(in srgb,var(--accent) 30%,transparent)}
+.dtag.pat{color:var(--ink-dim);background:color-mix(in srgb,var(--ink-faint) 10%,transparent);border:1px solid var(--line)}
+.drow .duni{font-family:var(--mono);font-size:12px;color:var(--water)}
+.drow .dst{font-family:var(--mono);font-size:10.5px;color:var(--ink-faint);margin-left:5px}
+.drow .dtitle{font-weight:600;font-size:14px;letter-spacing:-.01em}
+.drow .dcat{display:inline-block;margin-top:4px;font-size:10.5px;padding:2px 8px;border-radius:999px;color:var(--water);background:color-mix(in srgb,var(--water) 9%,transparent);border:1px solid color-mix(in srgb,var(--water) 22%,transparent)}
+.drow .dinv{font-family:var(--mono);font-size:12px;color:var(--ink-dim);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.drow .dref{font-family:var(--mono);font-size:12px;color:var(--accent);text-align:right}
+@media (max-width:820px){
+  .thead-deal{display:none}
+  .drow{grid-template-columns:auto 1fr;gap:6px 10px}
+  .drow .dinv{display:none}
+  .drow .duni{white-space:normal}
+  .drow .dref{text-align:left}
+}
 .kpis{display:grid;grid-template-columns:repeat(6,1fr);gap:1px;background:var(--line);
   border:1px solid var(--line);border-radius:14px;overflow:hidden;margin:26px 0}
 .kpi{background:var(--surface);padding:18px 20px}
@@ -284,10 +333,10 @@ select:focus{outline:2px solid var(--accent);outline-offset:1px}
       <button class="theme-btn" id="theme" type="button">Theme</button>
     </div>
     <h1 class="lede">The university software pipeline, <em>ranked before it has a name.</em></h1>
-    <p class="sub">One feed over four sources: university tech-transfer listings, faculty research, federal
-      grants, and patents. <b>Deals like theirs</b> is licensable university software from tech-transfer
-      offices. <b>Grant-backed software cos</b> is federally funded software companies, a separate,
-      already-formed pool. The two are labeled honestly because they are not the same motion.</p>
+    <p class="sub">Two lenses on the university software pipeline. <b>Deals like theirs</b> is university
+      software IP, tech-transfer listings you can license now plus granted university patents across every
+      US state. <b>Grant-backed software cos</b> is federally funded software companies, a separate,
+      already-formed pool. Labeled honestly because they are not the same motion.</p>
     <div class="prov">
       <span class="live"><span class="dot"></span> Confidential, prepared for Summit Venture Studio</span>
       <span>Sources <b>U of Utah tech transfer</b> · <b>NIH</b> · <b>NSF</b> · <b>DoD</b> · <b>OpenAlex</b></span>
@@ -298,45 +347,32 @@ select:focus{outline:2px solid var(--accent);outline-offset:1px}
 
 <div class="wrap">
   <div class="viewtabs" role="group" aria-label="View">
-    <button id="tab-tto" class="vtab" aria-pressed="true">Deals like theirs<span>university IP, licensable now</span></button>
-    <button id="tab-patents" class="vtab" aria-pressed="false">University patents<span>all US universities, national</span></button>
+    <button id="tab-deals" class="vtab" aria-pressed="true">Deals like theirs<span>university software IP</span></button>
     <button id="tab-grants" class="vtab" aria-pressed="false">Grant-backed software cos<span>SBIR/STTR + DoD, not TTO deals</span></button>
   </div>
 
-  <div id="view-tto">
-    <p class="tto-intro">The <b>licensable-now</b> layer: software available to license today from a university
-      tech-transfer office, with the faculty inventor attached and a one-click path to the listing. Shown here
-      for the <b>University of Utah</b> (each school's licensing portal is different, so this layer is added school
-      by school). For coverage of <b>every US university</b>, see the University patents tab. Already-licensed
-      inventions drop off this list, so what you see is the pipeline ahead, not deals already done.</p>
+  <div id="view-deals">
+    <p class="tto-intro">University software IP, one table. Each row is tagged by how we found it:
+      <b>Licensable now</b> is software a tech-transfer office is offering to license today (University of Utah,
+      with more schools added over time), and <b>Patent</b> is a granted university software patent
+      (every US university). Filter by type, state, university, or software category. Faculty inventor attached;
+      each row links to the listing or the patent.</p>
     <div class="controls">
-      <select id="tto-cat" aria-label="Category"><option value="">All categories</option></select>
-      <span class="count" id="tto-count"></span>
+      <div class="seg" role="group" aria-label="Type">
+        <button data-dtype="all" aria-pressed="true">All</button>
+        <button data-dtype="license" aria-pressed="false">Licensable now</button>
+        <button data-dtype="patent" aria-pressed="false">Patents</button>
+      </div>
+      <select id="deal-state" aria-label="State"><option value="">All states</option></select>
+      <select id="deal-univ" aria-label="University"><option value="">All universities</option></select>
+      <select id="deal-cat" aria-label="Software category"><option value="">All categories</option></select>
+      <span class="count" id="deal-count"></span>
     </div>
     <div class="feed">
-      <div class="thead thead-tto">
-        <div>Category</div><div>Technology</div><div>Faculty inventor</div><div>University</div><div class="r">Tech ID</div>
+      <div class="thead thead-deal">
+        <div>Type</div><div>University</div><div>Technology</div><div>Inventors</div><div class="r">Reference</div>
       </div>
-      <div id="tto-rows"></div>
-    </div>
-  </div>
-
-  <div id="view-patents" hidden>
-    <p class="tto-intro">Recent (2021+) software patents assigned to <b>US universities</b>, nationwide, straight
-      from USPTO's disambiguated bulk data. This is the "the tech-transfer office already protected it" signal
-      at national scale: a professor's software the university thought worth patenting. Assignee names are
-      USPTO-disambiguated, so the university is exact.</p>
-    <div class="controls">
-      <select id="pat-state" aria-label="State"><option value="">All states</option></select>
-      <select id="pat-univ" aria-label="University"><option value="">All universities</option></select>
-      <select id="pat-cat" aria-label="Software category"><option value="">All software types</option></select>
-      <span class="count" id="pat-count"></span>
-    </div>
-    <div class="feed">
-      <div class="thead thead-pat">
-        <div>University</div><div>Technology</div><div>Inventors</div><div class="r">Granted</div><div class="r">Patent</div>
-      </div>
-      <div id="pat-rows"></div>
+      <div id="deal-rows"></div>
     </div>
   </div>
 
@@ -397,8 +433,7 @@ select:focus{outline:2px solid var(--accent);outline-offset:1px}
 </div>
 
 <script id="data" type="application/json">__DATA__</script>
-<script id="ttodata" type="application/json">__TTO__</script>
-<script id="patdata" type="application/json">__PATENTS__</script>
+<script id="dealdata" type="application/json">__DEALS__</script>
 <script>
 (function(){
   "use strict";
@@ -600,108 +635,72 @@ select:focus{outline:2px solid var(--accent);outline-offset:1px}
   document.getElementById("softonly").addEventListener("change",function(e){ F.softonly=e.target.checked; apply(); });
   apply();
 
-  /* ---- Deals-like-theirs (TTO) view ---- */
-  var TTO=JSON.parse(document.getElementById("ttodata").textContent).records||[];
+  /* ---- Deals like theirs: combined university software IP (licensable + patents) ---- */
+  var DEALS=JSON.parse(document.getElementById("dealdata").textContent);
   (function(){
-    var box=document.getElementById("tto-rows");
-    // sort: Utah-confirmed first, then by scholarly output (established lab)
-    TTO.sort(function(a,b){ return (b.utah_confirmed?1:0)-(a.utah_confirmed?1:0) || (b.oa_works||0)-(a.oa_works||0); });
-    var PORTAL="https://technologylicensing.utah.edu/available-technologies/";
-    var ttoCat="";
-    function renderTTO(){
-      clear(box);
-      var list=TTO.filter(function(r){ return !ttoCat || r.category===ttoCat; });
-      list.forEach(function(r){
-        var nm=r.lead_inventor||(r.inventors||"").split(",")[0]||DASH;
-        var inv;
-        // Only link/annotate OpenAlex when the match resolves to Utah; a namesake
-        // guess (Florida, LSU) is worse than nothing. Otherwise show the name plain.
-        if(r.utah_confirmed && r.oa_url){
-          inv=el("a",{class:"tinv",href:r.oa_url,target:"_blank",rel:"noopener",title:"OpenAlex profile"},[nm]);
-          inv.addEventListener("click",function(e){ e.stopPropagation(); });
-          if(r.oa_works) inv.appendChild(el("small",{text:" · "+r.oa_works+"w"}));
-        } else {
-          inv=el("div",{class:"tinv"},[nm]);
-        }
-        var extra=(r.inventors||"").match(/\+\d+/);
-        if(extra) inv.appendChild(el("small",{text:" "+extra[0]}));
-        var uni=el("div",{class:"tuni"},["University of Utah"]);
-        if(r.utah_confirmed) uni.appendChild(el("span",{class:"vok",title:"Inventor confirmed at Utah via OpenAlex",text:" ✓"}));
-        var row=el("div",{class:"trow",role:"button",tabindex:"0",title:"Open this technology's listing at the U of Utah TTO"},[
-          el("div",null,[el("span",{class:"tcat",text:r.category||"Software"})]),
-          el("div",null,[el("div",{class:"ttitle",text:r.title})]),
-          inv, uni, el("div",{class:"tid",text:r.id||""})]);
-        row.addEventListener("click",function(){ window.open(PORTAL+encodeURIComponent(r.id),"_blank","noopener"); });
-        box.appendChild(row);
-      });
-      var c=document.getElementById("tto-count");
-      if(c) c.textContent=list.length+" of "+TTO.length+" licensable technologies";
-    }
-    var catSel=document.getElementById("tto-cat");
-    if(catSel){
-      var cats={}; TTO.forEach(function(r){ if(r.category) cats[r.category]=(cats[r.category]||0)+1; });
-      Object.keys(cats).sort().forEach(function(k){ catSel.appendChild(el("option",{value:k,text:k+" ("+cats[k]+")"})); });
-      catSel.addEventListener("change",function(e){ ttoCat=e.target.value; renderTTO(); });
-    }
-    renderTTO();
-  })();
-
-  /* ---- University patents (national) view ---- */
-  var PAT=JSON.parse(document.getElementById("patdata").textContent);
-  (function(){
-    var box=document.getElementById("pat-rows"), recs=PAT.records||[];
-    var uniSel=document.getElementById("pat-univ"), stSel=document.getElementById("pat-state"),
-        catSel=document.getElementById("pat-cat");
-    var pUni="", pState="", pCat="";
+    var box=document.getElementById("deal-rows"), recs=DEALS.records||[];
+    // licensable-now first (actionable), then patents newest first
+    recs.sort(function(a,b){
+      if(a.dtype!==b.dtype) return a.dtype==="license"?-1:1;
+      return (b.date||"")<(a.date||"")?-1:1;
+    });
+    var stSel=document.getElementById("deal-state"), uniSel=document.getElementById("deal-univ"),
+        catSel=document.getElementById("deal-cat");
+    var fType="", fState="", fUni="", fCat="", CAP=1500;
     var stc={}; recs.forEach(function(r){ if(r.state) stc[r.state]=(stc[r.state]||0)+1; });
-    Object.keys(stc).sort().forEach(function(s){
-      stSel.appendChild(el("option",{value:s,text:s+" ("+stc[s]+")"})); });
+    Object.keys(stc).sort().forEach(function(s){ stSel.appendChild(el("option",{value:s,text:s+" ("+stc[s]+")"})); });
     var cc={}; recs.forEach(function(r){ if(r.category) cc[r.category]=(cc[r.category]||0)+1; });
-    Object.keys(cc).sort().forEach(function(c){
-      catSel.appendChild(el("option",{value:c,text:c+" ("+cc[c]+")"})); });
+    Object.keys(cc).sort().forEach(function(c){ catSel.appendChild(el("option",{value:c,text:c+" ("+cc[c]+")"})); });
     function fillUniv(){
       clear(uniSel); uniSel.appendChild(el("option",{value:"",text:"All universities"}));
-      var c={}; recs.forEach(function(r){ if(!pState||r.state===pState) c[r.university]=(c[r.university]||0)+1; });
+      var c={}; recs.forEach(function(r){ if(!fState||r.state===fState) c[r.university]=(c[r.university]||0)+1; });
       Object.keys(c).sort().forEach(function(u){ uniSel.appendChild(el("option",{value:u,text:u+" ("+c[u]+")"})); });
     }
-    var CAP=1500;
     function draw(){
       clear(box);
       var list=recs.filter(function(r){
-        return (!pUni||r.university===pUni)&&(!pState||r.state===pState)&&(!pCat||r.category===pCat); });
+        return (!fType||r.dtype===fType)&&(!fState||r.state===fState)
+             &&(!fUni||r.university===fUni)&&(!fCat||r.category===fCat); });
       list.slice(0,CAP).forEach(function(r){
-        var uni=el("div",null,[el("span",{class:"puni",text:r.university})]);
-        if(r.state) uni.appendChild(el("span",{class:"pst",text:" "+r.state}));
-        var title=el("div",null,[el("div",{class:"ptitle",text:r.title})]);
-        if(r.category) title.appendChild(el("span",{class:"pcat",text:r.category}));
-        var row=el("div",{class:"prow",role:"button",tabindex:"0",title:"Open patent on Google Patents"},[
-          uni, title,
-          el("div",{class:"pinv",text:r.inventors||DASH}),
-          el("div",{class:"pdate",text:(r.date||"").slice(0,7)}),
-          el("div",{class:"pnum",text:"US"+r.id})]);
-        row.addEventListener("click",function(){ window.open(r.url,"_blank","noopener"); });
+        var lic=r.dtype==="license";
+        var badge=el("span",{class:"dtag "+(lic?"lic":"pat"),text:lic?"License":"Patent"});
+        var uni=el("div",null,[el("span",{class:"duni",text:r.university})]);
+        if(r.state) uni.appendChild(el("span",{class:"dst",text:" "+r.state}));
+        var title=el("div",null,[el("div",{class:"dtitle",text:r.title})]);
+        if(r.category) title.appendChild(el("span",{class:"dcat",text:r.category}));
+        var row=el("div",{class:"drow",role:"button",tabindex:"0",
+          title:lic?"Open the U of Utah tech-transfer listing":"Open patent on Google Patents"},[
+          el("div",null,[badge]), uni, title,
+          el("div",{class:"dinv",text:r.inventors||DASH}),
+          el("div",{class:"dref",text:r.ref||""})]);
+        row.addEventListener("click",function(){ if(r.url) window.open(r.url,"_blank","noopener"); });
         box.appendChild(row);
       });
-      var us={}, ss={};
-      list.forEach(function(r){ us[r.university]=1; if(r.state) ss[r.state]=1; });
-      var un=Object.keys(us).length, sn=Object.keys(ss).length;
-      var shown=Math.min(list.length,CAP);
+      var us={}, ss={}, lic=0;
+      list.forEach(function(r){ us[r.university]=1; if(r.state) ss[r.state]=1; if(r.dtype==="license") lic++; });
+      var un=Object.keys(us).length, sn=Object.keys(ss).length, shown=Math.min(list.length,CAP);
       var head=(shown<list.length ? "showing "+shown.toLocaleString()+" of "+list.length.toLocaleString()
                                   : list.length.toLocaleString())
-        +" US university software patents · "+un+(un===1?" university":" universities")
-        +" · "+sn+(sn===1?" state":" states");
+        +" university software IP ("+lic+" licensable now, "+(list.length-lic)+" patents) · "
+        +un+(un===1?" university":" universities")+" · "+sn+(sn===1?" state":" states");
       if(shown<list.length) head+=" · narrow with the filters to see all";
-      document.getElementById("pat-count").textContent=head;
+      document.getElementById("deal-count").textContent=head;
     }
-    fillUniv();
-    stSel.addEventListener("change",function(e){ pState=e.target.value; pUni=""; fillUniv(); draw(); });
-    uniSel.addEventListener("change",function(e){ pUni=e.target.value; draw(); });
-    catSel.addEventListener("change",function(e){ pCat=e.target.value; draw(); });
-    draw();
+    Array.prototype.forEach.call(document.querySelectorAll('#view-deals .seg button'),function(b){
+      b.addEventListener("click",function(){
+        Array.prototype.forEach.call(document.querySelectorAll('#view-deals .seg button'),
+          function(x){x.setAttribute("aria-pressed","false");});
+        b.setAttribute("aria-pressed","true"); fType=b.getAttribute("data-dtype")==="all"?"":b.getAttribute("data-dtype"); draw();
+      });
+    });
+    stSel.addEventListener("change",function(e){ fState=e.target.value; fUni=""; fillUniv(); draw(); });
+    uniSel.addEventListener("change",function(e){ fUni=e.target.value; draw(); });
+    catSel.addEventListener("change",function(e){ fCat=e.target.value; draw(); });
+    fillUniv(); draw();
   })();
 
-  /* ---- view toggle (3 views) ---- */
-  var VIEWS={tto:["tab-tto","view-tto"],patents:["tab-patents","view-patents"],grants:["tab-grants","view-grants"]};
+  /* ---- view toggle (2 views) ---- */
+  var VIEWS={deals:["tab-deals","view-deals"],grants:["tab-grants","view-grants"]};
   function setView(which){
     for(var k in VIEWS){
       var on=k===which;
@@ -741,8 +740,7 @@ select:focus{outline:2px solid var(--accent);outline-offset:1px}
 """
 
 out = (PAGE.replace("__DATA__", DATA_JSON)
-           .replace("__TTO__", TTO_JSON)
-           .replace("__PATENTS__", PATENTS_JSON)
+           .replace("__DEALS__", DEALS_JSON)
            .replace("__SCANNED__", SCANNED)
            .replace("__TOTAL__", str(data["total"])))
 (HERE / "headwaters.html").write_text(out)
