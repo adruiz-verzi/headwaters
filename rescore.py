@@ -15,7 +15,9 @@ WETLAB = re.compile(
     r"organoid|xenograft|gene therapy|gene[- ]edit|crispr|oligonucleotide|antisense|peptide|"
     r"small molecule|inhibitor|monoclonal|immunotherap|\bdrug\b|compound|heparin|cell therapy|"
     r"stem cell|\bassay\b|reagent|\benzyme\b|in vivo|in vitro|mouse model|zebrafish|"
-    r"fatty acid|nanoparticle|microfluidic|electrochemical|biomarker discovery)\b", re.I)
+    r"fatty acid|nanoparticle|microfluidic|electrochemical|biomarker discovery|"
+    r"\btissue\b|bionic|electrophysiolog|biosensor|regenerative|engineered heart|"
+    r"cardiac tissue|cell quality|cell identit|cell line|organ-on|spheroid|\bculture\b)\b", re.I)
 
 data = json.load(open(os.path.join(HERE, "svs_data.json")))
 demoted = 0

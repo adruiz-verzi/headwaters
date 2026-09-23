@@ -38,20 +38,20 @@ def stream(zipname):
             yield row
 
 
-FOREIGN = ("université", "universität", "jiangsu", "tsinghua", "zhejiang")
+# Foreign university names that carry a US location in the data (bad disambiguation),
+# so the country=US check alone misses them. Belt-and-suspenders name guard.
+FOREIGN_NAME = re.compile(
+    r"hong kong|peking|tsinghua|zhejiang|jiangsu|fudan|shanghai|beijing|nanjing|"
+    r"tokyo|kyoto|osaka|seoul|korea|taiwan|singapore|nanyang|oxford|cambridge|"
+    r"imperial college|waterloo|toronto|mcgill|université|universität|politecnico|"
+    r"technion|hebrew university|ben-gurion|delft|aalto|kaist|postech|indian institute|"
+    r"chinese|huazhong|harbin|wuhan|tianjin|sichuan|national university|national taiwan",
+    re.I)
 
 
 def is_university(org):
-    return bool(UNIV_RE.search(org)) and not NOT_UNIV_RE.search(org)
-
-
-def us_fallback(org):
-    try:
-        org.encode("ascii")
-    except UnicodeEncodeError:
-        return False
-    low = org.lower()
-    return not any(f in low for f in FOREIGN)
+    return (bool(UNIV_RE.search(org)) and not NOT_UNIV_RE.search(org)
+            and not FOREIGN_NAME.search(org))
 
 
 def main():
@@ -68,10 +68,8 @@ def main():
         if not (org and is_university(org)):
             continue
         state, country = loc.get(r.get("location_id", ""), ("", ""))
-        if country and country != "US":
-            continue                       # exact drop of non-US
-        if not country and not us_fallback(org):
-            continue                       # missing location -> heuristic
+        if country != "US":
+            continue                       # strict: assignee must be in the US
         univ[r["patent_id"]] = (org, state)
         if i % 2_000_000 == 0:
             print(f"  assignee rows {i:,} | US university patents {len(univ):,}", file=sys.stderr)
@@ -114,15 +112,17 @@ def main():
             return "Computing / data processing"
         return None
     for r in stream("g_cpc_current.tsv.zip"):
-        pid = r["patent_id"]
-        rec = recs.get(pid)
+        # Only the PRIMARY classification (sequence 0) decides software. A secondary
+        # G06 code on a steel/oil/PET-scanner patent should NOT make it "software".
+        if r.get("cpc_sequence") != "0":
+            continue
+        rec = recs.get(r["patent_id"])
         if not rec:
             continue
         cat = cpc_cat(r.get("cpc_subclass", ""))
         if cat:
             rec["software"] = True
-            if not rec["category"]:
-                rec["category"] = cat
+            rec["category"] = cat
     recs = {k: v for k, v in recs.items() if v["software"]}
     print(f"recent US university SOFTWARE patents (by CPC): {len(recs)}", file=sys.stderr)
 

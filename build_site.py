@@ -50,6 +50,8 @@ for u in usa:
         "url": "https://www.usaspending.gov/search",
     })
 data["total"] = len(data["records"])
+import collections
+data["by_source"] = dict(collections.Counter(r["source"] for r in data["records"]))
 DATA_JSON = json.dumps(data, separators=(",", ":"))
 
 # "Deals like theirs": university-origin licensable software from the tech-transfer
@@ -656,11 +658,12 @@ select:focus{outline:2px solid var(--accent);outline-offset:1px}
       var c={}; recs.forEach(function(r){ if(!pState||r.state===pState) c[r.university]=(c[r.university]||0)+1; });
       Object.keys(c).sort().forEach(function(u){ uniSel.appendChild(el("option",{value:u,text:u+" ("+c[u]+")"})); });
     }
+    var CAP=1500;
     function draw(){
       clear(box);
       var list=recs.filter(function(r){
         return (!pUni||r.university===pUni)&&(!pState||r.state===pState)&&(!pCat||r.category===pCat); });
-      list.slice(0,1500).forEach(function(r){
+      list.slice(0,CAP).forEach(function(r){
         var uni=el("div",null,[el("span",{class:"puni",text:r.university})]);
         if(r.state) uni.appendChild(el("span",{class:"pst",text:" "+r.state}));
         var title=el("div",null,[el("div",{class:"ptitle",text:r.title})]);
@@ -673,9 +676,16 @@ select:focus{outline:2px solid var(--accent);outline-offset:1px}
         row.addEventListener("click",function(){ window.open(r.url,"_blank","noopener"); });
         box.appendChild(row);
       });
-      document.getElementById("pat-count").textContent=
-        list.length.toLocaleString()+" of "+recs.length.toLocaleString()+" US university software patents · "
-        +PAT.distinct_universities+" universities · "+(PAT.distinct_states||0)+" states";
+      var us={}, ss={};
+      list.forEach(function(r){ us[r.university]=1; if(r.state) ss[r.state]=1; });
+      var un=Object.keys(us).length, sn=Object.keys(ss).length;
+      var shown=Math.min(list.length,CAP);
+      var head=(shown<list.length ? "showing "+shown.toLocaleString()+" of "+list.length.toLocaleString()
+                                  : list.length.toLocaleString())
+        +" US university software patents · "+un+(un===1?" university":" universities")
+        +" · "+sn+(sn===1?" state":" states");
+      if(shown<list.length) head+=" · narrow with the filters to see all";
+      document.getElementById("pat-count").textContent=head;
     }
     fillUniv();
     stSel.addEventListener("change",function(e){ pState=e.target.value; pUni=""; fillUniv(); draw(); });
