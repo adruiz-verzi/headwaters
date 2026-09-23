@@ -1,9 +1,9 @@
 {
  "source": "USPTO PatentsView disambiguated data (bulk), US universities",
  "recent_since": 2021,
- "total_software_patents": 2457,
- "distinct_universities": 211,
- "distinct_states": 51,
+ "total_software_patents": 2438,
+ "distinct_universities": 209,
+ "distinct_states": 49,
  "utah_software": 13,
  "records": [
   {
@@ -341,18 +341,6 @@
    "software": true,
    "is_utah": false,
    "url": "https://patents.google.com/patent/US12499971"
-  },
-  {
-   "id": "12499975",
-   "university": "UNIVERSITY OF WYOMING",
-   "state": "WY",
-   "title": "Methods and apparatus for enhanced oil recovery",
-   "date": "2025-12-16",
-   "inventors": "Mohammad PIRI, Jan Kubelka, Shixun Bai",
-   "category": "Domain informatics",
-   "software": true,
-   "is_utah": false,
-   "url": "https://patents.google.com/patent/US12499975"
   },
   {
    "id": "12499983",
@@ -4723,18 +4711,6 @@
    "url": "https://patents.google.com/patent/US12283115"
   },
   {
-   "id": "12283351",
-   "university": "California Institute of Technology",
-   "state": "CA",
-   "title": "Screening methods and related catalysts, materials, compositions, methods and systems",
-   "date": "2025-04-22",
-   "inventors": "William A. Goddard, III, Alessandro Fortunelli, Qi An",
-   "category": "Domain informatics",
-   "software": true,
-   "is_utah": false,
-   "url": "https://patents.google.com/patent/US12283351"
-  },
-  {
    "id": "12284290",
    "university": "University of South Florida",
    "state": "FL",
@@ -7963,18 +7939,6 @@
    "url": "https://patents.google.com/patent/US12094243"
   },
   {
-   "id": "12094579",
-   "university": "Oregon State University",
-   "state": "OR",
-   "title": "Machine-learning method and apparatus to isolate chemical signatures",
-   "date": "2024-09-17",
-   "inventors": "Gerrad Jones",
-   "category": "Domain informatics",
-   "software": true,
-   "is_utah": false,
-   "url": "https://patents.google.com/patent/US12094579"
-  },
-  {
    "id": "12095933",
    "university": "ARIZONA BOARD OF REGENTS ON BEHALF OF NORTHERN ARIZONA UNIVERSITY",
    "state": "AZ",
@@ -8647,18 +8611,6 @@
    "url": "https://patents.google.com/patent/US12057233"
   },
   {
-   "id": "12057304",
-   "university": "University of Tennessee Research Foundation",
-   "state": "TN",
-   "title": "Correlative multimodal chemical imaging via machine learning",
-   "date": "2024-08-06",
-   "inventors": "Anton V. Ievlev, Nikolay Borodinov, Steven T. King, Olga S. Ovchinnikova",
-   "category": "Domain informatics",
-   "software": true,
-   "is_utah": false,
-   "url": "https://patents.google.com/patent/US12057304"
-  },
-  {
    "id": "12058167",
    "university": "California Institute of Technology",
    "state": "CA",
@@ -8825,18 +8777,6 @@
    "software": true,
    "is_utah": false,
    "url": "https://patents.google.com/patent/US12046326"
-  },
-  {
-   "id": "12046334",
-   "university": "THE REGENTS OF THE UNIVERSITY OF CALIFORNIA",
-   "state": "CA",
-   "title": "Source identification for unknown molecules using mass spectral matching",
-   "date": "2024-07-23",
-   "inventors": "Amina Bouslimani, Mingxun Wang, Pieter Dorrestein",
-   "category": "Domain informatics",
-   "software": true,
-   "is_utah": false,
-   "url": "https://patents.google.com/patent/US12046334"
   },
   {
    "id": "12046364",
@@ -10087,18 +10027,6 @@
    "url": "https://patents.google.com/patent/US11972630"
   },
   {
-   "id": "11972843",
-   "university": "MASSACHUSETTS INSTITUTE OF TECHNOLOGY",
-   "state": "MA",
-   "title": "Systems and methods for predicting adverse events and assessing level of sedation during medical procedures",
-   "date": "2024-04-30",
-   "inventors": "Baruch Shlomo Krauss, Margaret Gan Guo, Rebecca Mieloszyk, Thomas Heldt",
-   "category": "Domain informatics",
-   "software": true,
-   "is_utah": false,
-   "url": "https://patents.google.com/patent/US11972843"
-  },
-  {
    "id": "11972856",
    "university": "Northwestern University",
    "state": "MA",
@@ -10433,18 +10361,6 @@
    "software": true,
    "is_utah": false,
    "url": "https://patents.google.com/patent/US11954910"
-  },
-  {
-   "id": "11955208",
-   "university": "CORNELL UNIVERSITY",
-   "state": "NY",
-   "title": "Computational systems and methods for improving the accuracy of drug toxicity predictions",
-   "date": "2024-04-09",
-   "inventors": "Kaitlyn Gayvert, Olivier Elemento, Neel Madhukar",
-   "category": "Domain informatics",
-   "software": true,
-   "is_utah": false,
-   "url": "https://patents.google.com/patent/US11955208"
   },
   {
    "id": "11947622",
@@ -13915,18 +13831,6 @@
    "url": "https://patents.google.com/patent/US11749379"
   },
   {
-   "id": "11749383",
-   "university": "THE REGENTS OF THE UNIVERSITY OF CALIFORNIA",
-   "state": "CA",
-   "title": "Methods and systems of predicting agent induced effects in silico",
-   "date": "2023-09-05",
-   "inventors": "Igor V. Vorobyov, Colleen Clancy, Kevin DeMarco, Pei Yang",
-   "category": "Domain informatics",
-   "software": true,
-   "is_utah": false,
-   "url": "https://patents.google.com/patent/US11749383"
-  },
-  {
    "id": "11750366",
    "university": "Regents of the University of Minnesota",
    "state": "MN",
@@ -14609,18 +14513,6 @@
    "software": true,
    "is_utah": false,
    "url": "https://patents.google.com/patent/US11710261"
-  },
-  {
-   "id": "11710542",
-   "university": "Washington University",
-   "state": "MO",
-   "title": "Methods of protein docking and rational drug design",
-   "date": "2023-07-25",
-   "inventors": "Gregory Bowman",
-   "category": "Domain informatics",
-   "software": true,
-   "is_utah": false,
-   "url": "https://patents.google.com/patent/US11710542"
   },
   {
    "id": "11711209",
@@ -15593,18 +15485,6 @@
    "software": true,
    "is_utah": false,
    "url": "https://patents.google.com/patent/US11663717"
-  },
-  {
-   "id": "11664093",
-   "university": "The Board of Trustees of the University of Illinois",
-   "state": "IL",
-   "title": "Extrapolative prediction of enantioselectivity enabled by computer-driven workflow, new molecular representations and machine learning",
-   "date": "2023-05-30",
-   "inventors": "Andrew F. Zahrt, Scott E. Denmark, Yang Wang, Jeremy J. Henle",
-   "category": "Domain informatics",
-   "software": true,
-   "is_utah": false,
-   "url": "https://patents.google.com/patent/US11664093"
   },
   {
    "id": "11664096",
@@ -18619,18 +18499,6 @@
    "url": "https://patents.google.com/patent/US11514537"
   },
   {
-   "id": "11514567",
-   "university": "Inner Mongolia University of Technology",
-   "state": "NM",
-   "title": "On-line real-time diagnosis system and method for wind turbine blade (WTB) damage",
-   "date": "2022-11-29",
-   "inventors": "Xiaoyan Chen, Xiaoyi Zhao, Chaoyi Dong",
-   "category": "Computer vision / imaging",
-   "software": true,
-   "is_utah": false,
-   "url": "https://patents.google.com/patent/US11514567"
-  },
-  {
    "id": "11515000",
    "university": "Wayne State University",
    "state": "MI",
@@ -18737,18 +18605,6 @@
    "software": true,
    "is_utah": false,
    "url": "https://patents.google.com/patent/US11508128"
-  },
-  {
-   "id": "11508462",
-   "university": "Duke University",
-   "state": "NC",
-   "title": "Control of trion density in carbon nanotubes for electro-optical and opto-electric devices",
-   "date": "2022-11-22",
-   "inventors": "Jean-Hubert Olivier, George BULLARD, Michael J. Therien, Yusong BAI",
-   "category": "Domain informatics",
-   "software": true,
-   "is_utah": false,
-   "url": "https://patents.google.com/patent/US11508462"
   },
   {
    "id": "11500487",
@@ -19709,18 +19565,6 @@
    "software": true,
    "is_utah": false,
    "url": "https://patents.google.com/patent/US11462296"
-  },
-  {
-   "id": "11462303",
-   "university": "CORNELL UNIVERSITY",
-   "state": "NY",
-   "title": "Computational systems and methods for improving the accuracy of drug toxicity predictions",
-   "date": "2022-10-04",
-   "inventors": "Olivier Elemento, Neel Madhukar, Kaitlyn Gayvert",
-   "category": "Domain informatics",
-   "software": true,
-   "is_utah": false,
-   "url": "https://patents.google.com/patent/US11462303"
   },
   {
    "id": "11463511",
@@ -22771,18 +22615,6 @@
    "url": "https://patents.google.com/patent/US11302043"
   },
   {
-   "id": "11302422",
-   "university": "THE TRUSTEES OF COLUMBIA UNIVERSITY IN THE CITY OF NEW YORK",
-   "state": "NY",
-   "title": "Methods and systems for identifying a drug mechanism of action using network dysregulation",
-   "date": "2022-04-12",
-   "inventors": "Andrea Califano, Mukesh Bansal, Yishai Shimoni",
-   "category": "Domain informatics",
-   "software": true,
-   "is_utah": false,
-   "url": "https://patents.google.com/patent/US11302422"
-  },
-  {
    "id": "11303377",
    "university": "Regents of the University of Minnesota",
    "state": "MN",
@@ -23923,18 +23755,6 @@
    "url": "https://patents.google.com/patent/US11239963"
   },
   {
-   "id": "11240069",
-   "university": "NAGOYA INSTITUTE OF TECHNOLOGY",
-   "state": "MH",
-   "title": "Communication device, information processing method, and storage medium",
-   "date": "2022-02-01",
-   "inventors": "Kenichi Koga, Tatsuya Koike, Yoshiki Oishi, Nobuyoshi Kikuma",
-   "category": "Networking / security",
-   "software": true,
-   "is_utah": false,
-   "url": "https://patents.google.com/patent/US11240069"
-  },
-  {
    "id": "11240137",
    "university": "Northwestern University",
    "state": "MA",
@@ -24883,18 +24703,6 @@
    "url": "https://patents.google.com/patent/US11177020"
   },
   {
-   "id": "11177021",
-   "university": "Texas Tech University System",
-   "state": "TX",
-   "title": "Apparatus and computerized method for predicting asphaltene precipitation based on aggregation thermodynamics",
-   "date": "2021-11-16",
-   "inventors": "Meng Wang, Chau-Chyun Chen, Yifan Hao, Md Rashedul Islam",
-   "category": "Domain informatics",
-   "software": true,
-   "is_utah": false,
-   "url": "https://patents.google.com/patent/US11177021"
-  },
-  {
    "id": "11178166",
    "university": "THE REGENTS OF THE UNIVERSITY OF CALIFORNIA",
    "state": "CA",
@@ -25675,18 +25483,6 @@
    "url": "https://patents.google.com/patent/US11127484"
   },
   {
-   "id": "11127487",
-   "university": "ARIZONA BOARD OF REGENTS ON BEHALF OF ARIZONA STATE UNIVERSITY",
-   "state": "AZ",
-   "title": "Systems and methods for cyber-enabled structure elucidation",
-   "date": "2021-09-21",
-   "inventors": "Morton Munk, Klaus-Peter Schulz",
-   "category": "Domain informatics",
-   "software": true,
-   "is_utah": false,
-   "url": "https://patents.google.com/patent/US11127487"
-  },
-  {
    "id": "11128479",
    "university": "ARIZONA BOARD OF REGENTS ON BEHALF OF ARIZONA STATE UNIVERSITY",
    "state": "AZ",
@@ -25901,18 +25697,6 @@
    "software": true,
    "is_utah": false,
    "url": "https://patents.google.com/patent/US11113851"
-  },
-  {
-   "id": "11114184",
-   "university": "Albert Einstein College of Medicine",
-   "state": "NY",
-   "title": "DNA methyltransferase 1 transition state structure and uses thereof",
-   "date": "2021-09-07",
-   "inventors": "Vern L. Schramm, Quan-Guang Du, Zhen Wang",
-   "category": "Domain informatics",
-   "software": true,
-   "is_utah": false,
-   "url": "https://patents.google.com/patent/US11114184"
   },
   {
    "id": "11114197",
@@ -27557,18 +27341,6 @@
    "software": true,
    "is_utah": false,
    "url": "https://patents.google.com/patent/US11004536"
-  },
-  {
-   "id": "11004539",
-   "university": "THE REGENTS OF THE UNIVERSITY OF CALIFORNIA",
-   "state": "CA",
-   "title": "Predicting metabolic side effects of transported drugs",
-   "date": "2021-05-11",
-   "inventors": "Henry Liu, Sanjay Kumar Nigam",
-   "category": "Domain informatics",
-   "software": true,
-   "is_utah": false,
-   "url": "https://patents.google.com/patent/US11004539"
   },
   {
    "id": "11004543",

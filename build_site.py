@@ -172,7 +172,13 @@ a.tinv:hover{color:var(--water)}
 .prow .pinv{font-family:var(--mono);font-size:12px;color:var(--ink-dim);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .prow .pdate{font-family:var(--mono);font-size:12px;color:var(--ink-faint);text-align:right}
 .prow .pnum{font-family:var(--mono);font-size:12px;color:var(--accent);text-align:right}
-@media (max-width:820px){.thead-pat{display:none}.prow{grid-template-columns:1fr auto;gap:10px}.prow .puni,.prow .pinv,.prow .pdate{display:none}}
+@media (max-width:820px){
+  .thead-pat{display:none}
+  .prow{grid-template-columns:1fr;gap:5px}
+  .prow .pinv,.prow .pdate{display:none}
+  .prow .puni{white-space:normal;color:var(--water)}
+  .prow .pnum{text-align:left}
+}
 .kpis{display:grid;grid-template-columns:repeat(6,1fr);gap:1px;background:var(--line);
   border:1px solid var(--line);border-radius:14px;overflow:hidden;margin:26px 0}
 .kpi{background:var(--surface);padding:18px 20px}

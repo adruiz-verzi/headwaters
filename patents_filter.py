@@ -45,7 +45,12 @@ FOREIGN_NAME = re.compile(
     r"tokyo|kyoto|osaka|seoul|korea|taiwan|singapore|nanyang|oxford|cambridge|"
     r"imperial college|waterloo|toronto|mcgill|université|universität|politecnico|"
     r"technion|hebrew university|ben-gurion|delft|aalto|kaist|postech|indian institute|"
-    r"chinese|huazhong|harbin|wuhan|tianjin|sichuan|national university|national taiwan",
+    r"chinese|huazhong|harbin|wuhan|tianjin|sichuan|national university|national taiwan|"
+    r"inner mongolia|nagoya|kyushu|hokkaido|tohoku|keio|waseda|zhengzhou|shandong|jilin|"
+    r"dalian|xiamen|chongqing|shenzhen|guangzhou|hunan|hubei|central south|south china|"
+    r"east china|north china|yonsei|hanyang|sungkyunkwan|pohang|rwth|karlsruhe|leuven|"
+    r"lund|uppsala|sorbonne|milano|zurich|munich|amsterdam|copenhagen|helsinki|"
+    r"tel aviv|king abdullah|king fahd|qatar|saudi|\bindia\b|\bchina\b|\bjapan\b",
     re.I)
 
 
@@ -104,10 +109,10 @@ def main():
                "H04L": "Networking / security", "G16H": "Health informatics",
                "G16B": "Bioinformatics"}
     def cpc_cat(sub):
-        if sub in CPC_CAT:
+        # Only true software classes. NOT G16C (computational chemistry / materials
+        # science) or G16Z (general ICT) — those tag oil/catalyst/materials patents.
+        if sub in CPC_CAT:                       # G06F/N/Q/T/V/K, H04L, G16H, G16B
             return CPC_CAT[sub]
-        if sub.startswith("G16"):
-            return "Domain informatics"
         if sub.startswith("G06"):
             return "Computing / data processing"
         return None
