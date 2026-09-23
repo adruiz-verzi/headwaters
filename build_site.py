@@ -97,7 +97,7 @@ DEALS = {
 }
 DEALS_JSON = json.dumps(DEALS, separators=(",", ":"))
 
-SCANNED = datetime.date(2026, 9, 22).strftime("%B %-d, %Y")
+SCANNED = "September 2026"
 
 PAGE = r"""<title>Headwaters . Spinout Intelligence for Summit Venture Studio</title>
 <style>
@@ -334,12 +334,11 @@ select:focus{outline:2px solid var(--accent);outline-offset:1px}
     </div>
     <h1 class="lede">The university software pipeline, <em>ranked before it has a name.</em></h1>
     <p class="sub">Two lenses on the university software pipeline. <b>Deals like theirs</b> is university
-      software IP, tech-transfer listings you can license now plus granted university patents across every
-      US state. <b>Grant-backed software cos</b> is federally funded software companies, a separate,
+      software IP, tech-transfer listings you can license now plus granted university patents from US universities nationwide. <b>Grant-backed software cos</b> is federally funded software companies, a separate,
       already-formed pool. Labeled honestly because they are not the same motion.</p>
     <div class="prov">
       <span class="live"><span class="dot"></span> Confidential, prepared for Summit Venture Studio</span>
-      <span>Sources <b>U of Utah tech transfer</b> · <b>NIH</b> · <b>NSF</b> · <b>DoD</b> · <b>OpenAlex</b></span>
+      <span>Sources <b>USPTO patents</b> (all US universities) · <b>U of Utah tech transfer</b> · <b>NIH</b> · <b>NSF</b> · <b>DoD</b> (USAspending) · <b>OpenAlex</b></span>
       <span>Snapshot __SCANNED__ · refreshes on a scheduled run</span>
     </div>
   </div>
@@ -355,7 +354,7 @@ select:focus{outline:2px solid var(--accent);outline-offset:1px}
     <p class="tto-intro">University software IP, one table. Each row is tagged by how we found it:
       <b>Licensable now</b> is software a tech-transfer office is offering to license today (University of Utah,
       with more schools added over time), and <b>Patent</b> is a granted university software patent
-      (every US university). Filter by type, state, university, or software category. Faculty inventor attached;
+      (US universities nationwide). Filter by type, state, university, or software category. Faculty inventor attached;
       each row links to the listing or the patent.</p>
     <div class="controls">
       <div class="seg" role="group" aria-label="Type">
