@@ -1,0 +1,241 @@
+{
+ "source": "University of Utah Technology Licensing Office \u2014 Available Technologies",
+ "fetched": "2026-09-22",
+ "portal": "https://technologylicensing.utah.edu/available-technologies/",
+ "total_listed": 196,
+ "software_note": "Filtered to software-leaning categories/titles (Computing, Imaging (Software), Digital Health, Data, Creative Works, plus AI/app/platform/algorithm/simulation in title). A few research-tool/model entries are wet-lab false positives to prune later.",
+ "records": [
+  {
+   "id": "U-8007",
+   "title": "Super-resolution Imaging",
+   "inventors": "Rajesh Menon",
+   "category": "Imaging (Software)",
+   "lead_inventor": "Rajesh Menon",
+   "oa_affiliation": "University of Utah",
+   "oa_url": "https://openalex.org/A5017005305",
+   "oa_works": 315,
+   "utah_confirmed": true
+  },
+  {
+   "id": "U-7392",
+   "title": "AI Optimization of Power Systems Operations",
+   "inventors": "Masood Parvania +3",
+   "category": "Energy",
+   "lead_inventor": "Masood Parvania",
+   "oa_affiliation": "University of Utah",
+   "oa_url": "https://openalex.org/A5046208390",
+   "oa_works": 195,
+   "utah_confirmed": true
+  },
+  {
+   "id": "U-8029",
+   "title": "Distributed Power Allocation and Scheduling for Millimeter-wave Cellular Networks",
+   "inventors": "Mingyue Ji +3",
+   "category": "Computing",
+   "lead_inventor": "Mingyue Ji",
+   "oa_affiliation": "University of Florida",
+   "oa_url": "https://openalex.org/A5058487273",
+   "oa_works": 223,
+   "utah_confirmed": false
+  },
+  {
+   "id": "U-6651",
+   "title": "Cloud Auto-scaling for Memory Intensive Applications",
+   "inventors": "Ryan Stutsman +2",
+   "category": "Computing",
+   "lead_inventor": "Ryan Stutsman",
+   "oa_affiliation": "University of Utah",
+   "oa_url": "https://openalex.org/A5020086434",
+   "oa_works": 77,
+   "utah_confirmed": true
+  },
+  {
+   "id": "U-7280",
+   "title": "Moving Object Detection, Segmentation, and Tracking in Orbital Environments",
+   "inventors": "Neda Nategh +1",
+   "category": "Computing",
+   "lead_inventor": "Neda Nategh",
+   "oa_affiliation": "University of Utah",
+   "oa_url": "https://openalex.org/A5076882100",
+   "oa_works": 30,
+   "utah_confirmed": true
+  },
+  {
+   "id": "U-9348",
+   "title": "Spectroscopic Imaging Method for True Brain Temperature Measurement",
+   "inventors": "Dennis Parker +5",
+   "category": "Imaging (Software)",
+   "lead_inventor": "Dennis Parker",
+   "oa_affiliation": "University of Utah",
+   "oa_url": "https://openalex.org/A5049593207",
+   "oa_works": 463,
+   "utah_confirmed": true
+  },
+  {
+   "id": "U-7480",
+   "title": "Securing Electric Vehicle Charging Infrastructure",
+   "inventors": "Masood Parvania +2",
+   "category": "Computing",
+   "lead_inventor": "Masood Parvania",
+   "oa_affiliation": "University of Utah",
+   "oa_url": "https://openalex.org/A5046208390",
+   "oa_works": 195,
+   "utah_confirmed": true
+  },
+  {
+   "id": "U-7951",
+   "title": "Automated Adverse Event Identification Using AI",
+   "inventors": "Brian Bucher",
+   "category": "Digital Health",
+   "lead_inventor": "Brian Bucher",
+   "oa_affiliation": "University of Utah",
+   "oa_url": "https://openalex.org/A5010902260",
+   "oa_works": 116,
+   "utah_confirmed": true
+  },
+  {
+   "id": "U-7145",
+   "title": "Electric Bus Charging Optimization Modeling",
+   "inventors": "Masood Parvania +3",
+   "category": "Energy",
+   "lead_inventor": "Masood Parvania",
+   "oa_affiliation": "University of Utah",
+   "oa_url": "https://openalex.org/A5046208390",
+   "oa_works": 195,
+   "utah_confirmed": true
+  },
+  {
+   "id": "U-6647",
+   "title": "Perch: Enhanced Genetic Variant Prioritization",
+   "inventors": "Bingjian Feng",
+   "category": "Digital Health",
+   "lead_inventor": "Bingjian Feng",
+   "oa_affiliation": "University of Utah",
+   "oa_url": "https://openalex.org/A5028365792",
+   "oa_works": 253,
+   "utah_confirmed": true
+  },
+  {
+   "id": "U-6248",
+   "title": "Research Quest",
+   "inventors": "Ryan Bown +12",
+   "category": "Creative Works",
+   "lead_inventor": "Ryan Bown",
+   "oa_affiliation": "",
+   "oa_url": "https://openalex.org/A5042557762",
+   "oa_works": 2,
+   "utah_confirmed": false
+  },
+  {
+   "id": "U-7395",
+   "title": "Tokenization of Electrical Flexibility Resources",
+   "inventors": "Masood Parvania +7",
+   "category": "Computing",
+   "lead_inventor": "Masood Parvania",
+   "oa_affiliation": "University of Utah",
+   "oa_url": "https://openalex.org/A5046208390",
+   "oa_works": 195,
+   "utah_confirmed": true
+  },
+  {
+   "id": "U-7567",
+   "title": "UTEAnalytics",
+   "inventors": "Rajive Ganguli +1",
+   "category": "Computing",
+   "lead_inventor": "Rajive Ganguli",
+   "oa_affiliation": "University of Utah",
+   "oa_url": "https://openalex.org/A5003587205",
+   "oa_works": 62,
+   "utah_confirmed": true
+  },
+  {
+   "id": "U-6174",
+   "title": "Symptom Assessment Applications for Cancer Patients",
+   "inventors": "Lauri Linder",
+   "category": "Digital Health",
+   "lead_inventor": "Lauri Linder",
+   "oa_affiliation": "",
+   "oa_url": "https://openalex.org/A5070237775",
+   "oa_works": 94,
+   "utah_confirmed": false
+  },
+  {
+   "id": "U-6917",
+   "title": "FluoroWorld: A Virtual Reality Fluoroscopy Simulator for Radiology Procedural Education and Practice",
+   "inventors": "Soham Banerjee +3",
+   "category": "Computing",
+   "lead_inventor": "Soham Banerjee",
+   "oa_affiliation": "",
+   "oa_url": "https://openalex.org/A5067758645",
+   "oa_works": 55,
+   "utah_confirmed": false
+  },
+  {
+   "id": "U-8546",
+   "title": "Symptom Care at Home (SCH)",
+   "inventors": "Kathi Mooney +1",
+   "category": "Digital Health",
+   "lead_inventor": "Kathi Mooney",
+   "oa_affiliation": "University of Utah",
+   "oa_url": "https://openalex.org/A5009406971",
+   "oa_works": 182,
+   "utah_confirmed": true
+  },
+  {
+   "id": "U-4124",
+   "title": "Clinical Cancer Research System",
+   "inventors": "Cynthia Spigle +5",
+   "category": "Digital Health",
+   "lead_inventor": "Cynthia Spigle",
+   "oa_affiliation": "",
+   "oa_url": "",
+   "oa_works": 0,
+   "utah_confirmed": false
+  },
+  {
+   "id": "U-4991",
+   "title": "ERSA - Improved Algorithm for Determination of Shared Ancestry",
+   "inventors": "David Witherspoon +2",
+   "category": "Digital Health",
+   "lead_inventor": "David Witherspoon",
+   "oa_affiliation": "University of Utah",
+   "oa_url": "https://openalex.org/A5035739423",
+   "oa_works": 46,
+   "utah_confirmed": true
+  },
+  {
+   "id": "U-6392",
+   "title": "Histo!: A Pathology Training App for Medical Students",
+   "inventors": "Sheryl Scott +1",
+   "category": "Creative Works",
+   "lead_inventor": "Sheryl Scott",
+   "oa_affiliation": "Seattle University",
+   "oa_url": "https://openalex.org/A5038100905",
+   "oa_works": 61,
+   "utah_confirmed": false
+  },
+  {
+   "id": "U-6319",
+   "title": "SafeUT",
+   "inventors": "Juliana Briscoe +11",
+   "category": "Digital Health",
+   "lead_inventor": "Juliana Briscoe",
+   "oa_affiliation": "Louisiana State University",
+   "oa_url": "https://openalex.org/A5042377152",
+   "oa_works": 3,
+   "utah_confirmed": false
+  },
+  {
+   "id": "U-6182",
+   "title": "Dental Training in Virtual Reality",
+   "inventors": "Mark Durham",
+   "category": "Computing",
+   "lead_inventor": "Mark Durham",
+   "oa_affiliation": "Northwestern University",
+   "oa_url": "https://openalex.org/A5045551635",
+   "oa_works": 1088,
+   "utah_confirmed": false
+  }
+ ],
+ "pruned": "removed 7 wet-lab/hardware false positives; software-only set"
+}

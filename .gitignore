@@ -1,0 +1,19 @@
+# USPTO bulk data — multi-GB, free to re-download, never commit
+uspto/
+*.tsv.zip
+*.tsv
+
+# Intermediate / generated working files
+llm/chunks/
+llm/out/
+site-deploy/
+__pycache__/
+*.pyc
+.DS_Store
+
+# Caches
+openalex_cache.json
+
+# Tooling caches
+.claude/
+.wrangler/
